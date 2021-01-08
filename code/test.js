@@ -16,6 +16,11 @@ var typeMessage = (function() {
     }
 })(); */
 
+/**
+ * role 비교 함수
+ * 날짜 비교 함수 등 날짜 클래스
+ */
+
 // 문자열 [Object Type] 을 Type만 반환하는 함수
 var type = (function() {
     return {
@@ -94,7 +99,7 @@ var hihi = (function() {
 })();
 
 var stringUtil = (function() {
-    var str, ins, len;
+    /*var str, ins, len;
     var validation = function(a, b, c) {
         var items =
         [
@@ -112,32 +117,33 @@ var stringUtil = (function() {
             }
         ];
         type.typeCheck(items);
-        /* var s = ['', '0', 5];
+        var s = ['', '0', 5];
         str = (!a)? s[0] : a;
         ins = (!b)? s[1] : b;
         len = (!c)? s[2] : c;
 
         if(str === '') throw '문자 또는 숫자를 입력해주세요.';
         if(typeof(str) === 'number') str = str.toString();
-        if(typeof(ins) !== 'string') throw '문자 또는 숫자를 입력해주세요.'; */
-    }
+        if(typeof(ins) !== 'string') throw '문자 또는 숫자를 입력해주세요.';
+    }*/
     return {
         digit: {
-            getPrefix: function(target, insertStr, setlen) {
-                var items = validation(target, insertStr, setlen);
-                /* while(str.length < setlen) {
+            setPrefix: function(str, insertStr, setlen) {
+                //var items = validation(insertStr, setlen);
+                str = str.toString();
+                while(str.length < setlen) {
                     str = insertStr + str;
                 }
                 console.log('prefix: ', str);
-                return str; */
+                return str;
             },
-            getPostfix: function(target, insertStr, setlen) {
-                var items = validation(target, insertStr, setlen);
-                /* while(str.length < setlen) {
+            setPostfix: function(str, insertStr, setlen) {
+                //var items = validation(insertStr, setlen);
+                while(str.length < setlen) {
                     str = str + insertStr;
                 }
                 console.log('postfix: ', str);
-                return str; */
+                return str;
             }
         }
     }
@@ -159,8 +165,47 @@ var init = (function() {
     // prefix.setPattern(new RegExp('aaa'));
     //type.isString('');
 
-    prefix.isPrefix(1);
+    //prefix.isPrefix(1);
+    //contains('com', ['c', 'com', 'a']);
+    //month();
+    setDateFormat(new Date());
 })();
+
+function month() {
+    var fromDate = new Date('2020-12-31');
+    var toDate = new Date('2021-03-31');
+    var compare = toDate - fromDate;
+    var date = 24 * 60 * 60 * 1000;
+    var month = date * 30;
+    var year = month * 12;
+
+    console.log((compare/month).toFixed(2));
+}
+
+function compareMonth(a, b) {
+    
+}
+
+function setDateFormat(date) {
+    var formatDate = '';
+    formatDate += date.getFullYear();
+    formatDate += stringUtil.digit.setPrefix(date.getMonth(), '0', 2);
+    formatDate += stringUtil.digit.setPrefix(date.getDate(), '0', 2);
+    console.log(formatDate);
+    return formatDate;
+}
+
+function contains(a, b) {
+    type.getType(a);
+    var isCompare = false;
+    for(var i = 0; i < b.length; ++i) {
+        if(a === b[i]) {
+            isCompare = true;
+            break;
+        }
+    }
+    return isCompare;
+}
 
 // 우편 코드 관련 
 /*
